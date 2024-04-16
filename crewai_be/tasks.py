@@ -20,14 +20,13 @@ class CompanyResearchTasks():
         return Task(
             description=dedent(f"""Based on the list of companies {companies} and the positions {positions},
                 use the results from the Company Research Agent to research each position in each company.
-                to put together a json object containing the URLs for 3 blog articles, the URLs and title 
-                for 3 YouTube interviews for each position in each company.
-                               
+                to put together a json object containing the URLs for up to ten blog articles, the URLs and title 
+                for up to ten YouTube interviews for each position in each company.
                 """),
             agent=agent,
             expected_output=dedent(
-                """A json object containing the URLs for 3 blog articles and the URLs and 
-                    titles for 3 YouTube interviews for each position in each company."""),
+                """A json object containing the URLs for up to ten blog articles and the URLs and 
+                    titles for up to ten YouTube interviews for each position in each company."""),
             callback=self.append_event_callback,
             context=tasks,
             output_json=PositionInfoList
@@ -38,8 +37,8 @@ class CompanyResearchTasks():
             description=dedent(f"""Research the position {positions} for the {company} company. 
                 For each position, 
                                
-                               nd the URLs for 3 recent blog articles and the URLs and titles for
-                3 recent YouTube interviews for the person in each position.
+                               Find the URLs for up to ten recent blog articles and the URLs and titles for
+                up to ten recent YouTube interviews for the person in each position.
                 Return this collected information in a JSON object.
                                
                 Helpful Tips:

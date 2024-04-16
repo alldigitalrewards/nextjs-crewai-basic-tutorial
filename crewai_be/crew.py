@@ -5,7 +5,9 @@ from agents import CompanyResearchAgents
 from job_manager import append_event
 from tasks import CompanyResearchTasks
 from crewai import Crew
+import agentops
 
+agentops.init('c63546e8-ed08-48f0-9b7e-d36d1675e97c')
 
 class CompanyResearchCrew:
     def __init__(self, job_id: str):
