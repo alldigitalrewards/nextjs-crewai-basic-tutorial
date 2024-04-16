@@ -15,8 +15,8 @@ class CompanyResearchAgents():
     def research_manager(self, companies: List[str], positions: List[str]) -> Agent:
         return Agent(
             role="Company Research Manager",
-            goal=f"""Generate a list of JSON objects containing the urls for 3 recent blog articles and 
-                the url and title for 3 recent YouTube interview, for each position in each company.
+            goal=f"""Generate a list of JSON objects containing the urls for up to ten recent blog articles and 
+                the url and title for up to ten recent YouTube interview, for each position in each company.
              
                 Companies: {companies}
                 Positions: {positions}
@@ -27,7 +27,7 @@ class CompanyResearchAgents():
                 - Do not generate fake information. Only return the information you find. Nothing else!
                 - Do not stop researching until you find the requested information for each position in each company.
                 - All the companies and positions exist so keep researching until you find the information for each one.
-                - Make sure you each researched position for each company contains 3 blog articles and 3 YouTube interviews.
+                - Make sure you each researched position for each company contains up to ten blog articles and up to ten YouTube interviews.
                 """,
             backstory="""As a Company Research Manager, you are responsible for aggregating all the researched information
                 into a list.""",
@@ -40,8 +40,8 @@ class CompanyResearchAgents():
     def company_research_agent(self) -> Agent:
         return Agent(
             role="Company Research Agent",
-            goal="""Look up the specific positions for a given company and find urls for 3 recent blog articles and 
-                the url and title for 3 recent YouTube interview for each person in the specified positions. It is your job to return this collected 
+            goal="""Look up the specific positions for a given company and find urls for up to ten recent blog articles and 
+                the url and title for up to ten recent YouTube interview for each person in the specified positions. It is your job to return this collected 
                 information in a JSON object""",
             backstory="""As a Company Research Agent, you are responsible for looking up specific positions 
                 within a company and gathering relevant information.

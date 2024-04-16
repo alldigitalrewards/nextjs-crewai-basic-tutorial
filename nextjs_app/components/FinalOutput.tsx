@@ -1,5 +1,6 @@
 import React from "react";
 import { PositionInfo } from "@/hooks/useCrewJob";
+import CopyToClipboardButton from "@/components/CopyToClipboardButton";
 
 interface FinalOutputProps {
   positionInfoList: PositionInfo[];
@@ -12,9 +13,23 @@ export const FinalOutput: React.FC<FinalOutputProps> = ({
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
+  const generateOutputText = () => {
+    return positionInfoList.map((position) => {
+      const company = capitalizeFirstLetter(position.company);
+      const positionName = capitalizeFirstLetter(position.position);
+      const name = position.name;
+      const blogArticles = position.blog_articles_urls.join('\n');
+      const interviews = position.youtube_interviews_urls.map((video) => `${video.name}: ${video.url}`).join('\n');
+      return `Company: ${company}\nPosition: ${positionName}\nName: ${name}\nBlog Articles URLs:\n${blogArticles}\nYouTube Interviews:\n${interviews}`;
+    }).join('\n\n');
+  };
+
   return (
     <div className="flex flex-col h-full">
-      <h2 className="text-lg font-semibold my-2">Final Output</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-lg font-semibold my-2">Final Output</h2>
+        <CopyToClipboardButton textToCopy={generateOutputText()} />
+      </div>
       <div className="flex-grow overflow-auto border-2 border-gray-300 p-2">
         {positionInfoList.length === 0 ? (
           <p>No job result yet.</p>
@@ -81,3 +96,4 @@ export const FinalOutput: React.FC<FinalOutputProps> = ({
     </div>
   );
 };
+
